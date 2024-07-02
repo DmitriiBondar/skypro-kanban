@@ -1,39 +1,47 @@
 import { useState } from "react"
+import * as H from "./header.styled"
+import { Container } from "../../globalStyle.styled"
+import { Link } from "react-router-dom"
+import { routes } from "../../Router/routes"
 
-export const Header = ({addCard}) => {
+export const Header = ({addCard, changeTheme, setChangeTheme}) => {
 
 	const [isOpen, setIsOpen] = useState(false)
 	const toggleOpenUser = () => {
 		setIsOpen((prev) => !prev)
 	}
 
+	const onChangeTheme = () => {
+		setChangeTheme(changeTheme === "light" ? "dark" : "light")
+	}
+
     return (
-        <header className="header">
-			<div className="container">
-				<div className="header__block">
-					<div className="header__logo _show _light">
+        <H.Header>
+			<Container>
+				<H.HeaderBlock>
+					<H.HeaderLogoLight>
 						<a href="" target="_self"><img src="/images/logo.png" alt="logo"/></a>
-					</div>
-					<div className="header__logo _dark">
+					</H.HeaderLogoLight>
+					<H.HeaderLogoDark>
 						<a href="" target="_self"><img src="/images/logo_dark.png" alt="logo"/></a>
-					</div>
-					<nav className="header__nav">
-						<button onClick={addCard} className="header__btn-main-new _hover01" id="btnMainNew"><a>Создать новую задачу</a></button>
-						<a className="header__user _hover02" onClick={toggleOpenUser}>Ivan Ivanov</a>
+					</H.HeaderLogoDark>
+					<H.Nav>
+						<H.HeaderBtnNew onClick={addCard} id="btnMainNew"><a>Создать новую задачу</a></H.HeaderBtnNew>
+						<H.HeaderUser $isOpen={isOpen} onClick={toggleOpenUser}>Ivan Ivanov</H.HeaderUser>
 						{isOpen && (
-							<div className="header__pop-user-set pop-user-set" id="user-set-target">
-								<p className="pop-user-set__name">Ivan Ivanov</p>
-								<p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-								<div className="pop-user-set__theme">
+							<H.HeaderPopUserSet id="user-set-target">
+								<H.PopUserName>Ivan Ivanov</H.PopUserName>
+								<H.PopUserMail className="pop-user-set__mail">ivan.ivanov@gmail.com</H.PopUserMail>
+								<H.PopUserTheme>
 									<p>Темная тема</p>
-									<input type="checkbox" className="checkbox" name="checkbox"/>
-								</div>
-								<button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
-							</div>
+									<input checked={changeTheme === "dark"} onClick={onChangeTheme} type="checkbox" className="checkbox" name="checkbox"/>
+								</H.PopUserTheme>
+								<H.PopBtn type="button"><Link to={routes.exit}>Выйти</Link></H.PopBtn>
+							</H.HeaderPopUserSet>
 						)}
-					</nav>					
-				</div>
-			</div>			
-		</header>
+					</H.Nav>					
+				</H.HeaderBlock>
+			</Container>			
+		</H.Header>
     )
 }
