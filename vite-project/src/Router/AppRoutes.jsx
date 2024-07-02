@@ -21,7 +21,7 @@ export const AppRoutes = ({changeTheme, setChangeTheme}) => {
                     </Route>
                 </Route>
                 <Route path={routes.login} element={<LoginPage setUser={setUser} />}/>
-                <Route path={routes.register} element={<RegisterPage />}/>
+                <Route path={routes.register} element={<RegisterPage setUser={setUser} />}/>
                 <Route path={routes.notFound} element={<NotFound />}/>
             </Routes>
         </BrowserRouter>
