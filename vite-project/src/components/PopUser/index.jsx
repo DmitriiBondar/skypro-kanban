@@ -5,7 +5,7 @@ import * as E from "./PopUserStyled.styled"
 export const Exit = ({setUser}) => {
     const navg = useNavigate()
     const handleLogout = () => {
-        setUser(false)
+        setUser(null)
         navg(routes.login)
     }
     return (
