@@ -10,8 +10,8 @@ export const Column = ({title, cards}) => {
                 {cards.map((card) => {
                     return (
                         <Card 
-                            key={card.id} 
-                            id={card.id}
+                            key={card._id} 
+                            id={card._id}
                             cardTitle={card.title} 
                             topic={card.topic}
                             date={card.date}
