@@ -28,6 +28,8 @@ export const RegisterPage = ({setUser}) => {
         } else if (formData.password === '') {
             setError('Введите пароль')
             return
+        } else if (formData.login.length < 3 || formData.password.length < 3 || formData.name.length < 3) {
+           setError("Введите не менее трёх символов!") 
         }
 
         Registration(formData).then((res) => {
@@ -35,8 +37,10 @@ export const RegisterPage = ({setUser}) => {
             setUser(res.user)
             navigate(routes.login)
         }).catch((error) => {
-            console.log(error.message);
-            setError(error.message)
+            if (formData.login.length >= 3 && formData.password.length >= 3 && formData.name.length >= 3) {
+                console.log(error.message)
+                setError(error.message)
+            }
         })
     }
 
